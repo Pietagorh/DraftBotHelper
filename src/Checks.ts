@@ -19,8 +19,8 @@ export function isInteractionReply(message: Message): boolean {
 	return !!message.interaction
 }
 
-export function not(func: Check): Check {
-	return (message: Message) => !func(message);
+export function not(check: Check): Check {
+	return (message: Message) => !check(message);
 }
 
 export function commandNameIs(command: string): Check {
@@ -37,4 +37,12 @@ export function embedHasAuthor(message: Message): boolean {
 
 export function embedAuthorIncludes(text: string): Check {
 	return (message: Message) => embedHasAuthor(message) && message.embeds[0].author.name.includes(text);
+}
+
+export function embedHasTitle(message: Message): boolean {
+	return hasEmbed(message) && !!message.embeds[0].title;
+}
+
+export function embedTitleIncludes(text: string): Check {
+	return (message: Message) => embedHasTitle(message) && message.embeds[0].title.includes(text);
 }

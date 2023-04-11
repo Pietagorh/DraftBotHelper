@@ -1,4 +1,5 @@
 export enum ReminderTypes {
 	REPORT,
-	DAILY
+	DAILY,
+	GUILD_DAILY
 }
