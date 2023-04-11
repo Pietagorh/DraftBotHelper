@@ -4,6 +4,7 @@ import {contentStartsWith, isDraftBotId, isInteractionReply, not} from "../Check
 import {client, reminders} from "../index.js";
 import {ReminderTypes} from "../ReminderTypes.js";
 import {millisecondsFromString} from "../ParsingUtils.js";
+import {EffectsConstants} from "../resources/EffectConstants.js";
 
 export const listener: Listener = {
 	checks: [
@@ -17,6 +18,9 @@ export const listener: Listener = {
 		let delay = 9.75 * 60 * 1000; // 9m45s
 		if (message.content.includes("** | :clock10: Temps perdu : **")) {
 			delay += millisecondsFromString(message.content.split("** | :clock10: Temps perdu : **")[1].split("** |")[0]);
+		}
+		if (message.content.endsWith(":")) {
+				delay += EffectsConstants.DURATION[`:${message.content.split(":").slice(-2, -1)[0]}:` as keyof typeof EffectsConstants.DURATION];
 		}
 		reminders.setReminder(await client.users.fetch(userId), ReminderTypes.REPORT, delay);
 	}
