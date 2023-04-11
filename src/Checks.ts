@@ -1,5 +1,5 @@
 import {Message} from "discord.js";
-import {config} from "./config.js";
+import {config} from "./index.js";
 
 export type Check = (message: Message) => boolean;
 

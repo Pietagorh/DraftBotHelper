@@ -1,13 +1,14 @@
 import {DBHelper} from "./DBHelper.js";
 import {Reminders} from "./Reminders.js";
-import {readdir} from "fs";
-import {config} from "./config.js";
+import {readdir, readFileSync} from "fs";
 import {Message, GatewayIntentBits as Intents, Events} from "discord.js";
 import {Listener} from "./Listener.js";
 import {Check} from "./Checks.js";
 
 export const client = new DBHelper({intents: [Intents.Guilds, Intents.GuildMessages, Intents.MessageContent]});
 export const reminders = new Reminders();
+// Dégueulasse mais ça marchait pas sinon, aucune idée de pourquoi
+export const config = JSON.parse(readFileSync("./config.json", "utf-8")) as unknown as {token: string, draftbotId: string};
 
 client.once(Events.ClientReady, () => {
     console.log("Started");
