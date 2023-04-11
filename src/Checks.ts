@@ -46,3 +46,11 @@ export function embedHasTitle(message: Message): boolean {
 export function embedTitleIncludes(text: string): Check {
 	return (message: Message) => embedHasTitle(message) && message.embeds[0].title.includes(text);
 }
+
+export function embedHasDescription(message: Message): boolean {
+	return hasEmbed(message) && !!message.embeds[0].description;
+}
+
+export function embedDescriptionIncludes(text: string): Check {
+	return (message: Message) => embedHasDescription(message) && message.embeds[0].description.includes(text);
+}

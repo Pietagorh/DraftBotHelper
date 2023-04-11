@@ -9,14 +9,11 @@ export class Reminders {
 	}
 
 	setReminder(user: User, reminderType: ReminderTypes, delay: number) {
-		console.log("setReminder");
 		if (!this.reminders[user.id]) {
 			this.reminders[user.id] = {};
 		}
 
-		if (this.reminders[user.id][reminderType]) {
-			this.reminders[user.id][reminderType].unref();
-		}
+		this.clearReminder(user, reminderType);
 
 		this.reminders[user.id][reminderType] = setTimeout(async () => {
 			await user.send(`Reminder ${reminderType}`);
@@ -31,5 +28,11 @@ export class Reminders {
 			return;
 		}
 		delete this.reminders[user.id][reminderType];
+	}
+
+	clearReminder(user: User, reminderType: ReminderTypes): void {
+		if (this.reminders[user.id][reminderType]) {
+			clearTimeout(this.reminders[user.id][reminderType]);
+		}
 	}
 }
