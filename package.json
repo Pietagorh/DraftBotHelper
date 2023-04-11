@@ -1,0 +1,20 @@
+{
+  "name": "draftbothelper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+	"type": "module",
+  "scripts": {
+    "start": "tsc && node ./dist/index.js"
+  },
+  "author": "Pietagorh",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.3"
+  }
+}
