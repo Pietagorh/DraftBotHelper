@@ -33,4 +33,9 @@ client.on(Events.MessageCreate, (message: Message) => {
 	}
 });
 
+process.on("uncaughtException", (error) => {
+	console.log(error.stack);
+	// process.exit();
+});
+
 client.login(config.token).then();
