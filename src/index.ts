@@ -35,7 +35,6 @@ async function executeListeners(message: Message, fromEvent: Events): Promise<vo
 	}
 }
 
-for (const event of [Events.])
 client.on(Events.MessageCreate, async (message: Message) => {
 	await executeListeners(message, Events.MessageCreate);
 });
