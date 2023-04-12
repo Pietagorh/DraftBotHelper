@@ -1,5 +1,5 @@
 import {Listener} from "../Listener.js";
-import {Message} from "discord.js";
+import {Events, Message} from "discord.js";
 import {commandNameIs, embedAuthorIncludes, isDraftBotId} from "../Checks.js";
 import {reminders} from "../index.js";
 import {ReminderTypes} from "../ReminderTypes.js";
@@ -10,6 +10,8 @@ export const listener: Listener = {
 		commandNameIs("dailybonus"),
 		embedAuthorIncludes(", vous avez reçu votre récompense journalière !")
 	],
+
+	listeningToEvents: [Events.MessageCreate],
 
 	execute(message: Message): void {
 		const user = message.interaction.user;

@@ -1,5 +1,5 @@
 import {Listener} from "../Listener.js";
-import {Message} from "discord.js";
+import {Events, Message} from "discord.js";
 import {contentStartsWith, isDraftBotId, isInteractionReply, not} from "../Checks.js";
 import {client, reminders} from "../index.js";
 import {ReminderTypes} from "../ReminderTypes.js";
@@ -12,6 +12,8 @@ export const listener: Listener = {
 		contentStartsWith(":newspaper: ** Journal de <@"),
 		not(isInteractionReply)
 	],
+
+	listeningToEvents: [Events.MessageCreate],
 
 	async execute(message: Message): Promise<void> {
 		const userId = message.content.split("<@")[1].split(">")[0];

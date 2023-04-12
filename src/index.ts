@@ -1,7 +1,7 @@
 import {DBHelper} from "./DBHelper.js";
 import {Reminders} from "./Reminders.js";
 import {readdir, readFileSync} from "fs";
-import {Message, GatewayIntentBits as Intents, Events} from "discord.js";
+import {Events, GatewayIntentBits as Intents, Message} from "discord.js";
 import {Listener} from "./Listener.js";
 import {Check} from "./Checks.js";
 
@@ -26,12 +26,21 @@ readdir("./dist/listeners", (err, files) => {
 	});
 });
 
-client.on(Events.MessageCreate, (message: Message) => {
+async function executeListeners(message: Message, fromEvent: Events): Promise<void> {
 	for (const listener of listeners) {
-		if (listener.checks.every((check: Check) => check(message))) {
-			listener.execute(message);
+		if (listener.listeningToEvents.includes(fromEvent) && listener.checks.every((check: Check) => check(message))) {
+			await listener.execute(message, fromEvent);
+			return;
 		}
 	}
+}
+
+for (const event of [Events.])
+client.on(Events.MessageCreate, async (message: Message) => {
+	await executeListeners(message, Events.MessageCreate);
+});
+client.on(Events.MessageUpdate, async (message: Message) => {
+	await executeListeners(message, Events.MessageUpdate);
 });
 
 process.on("uncaughtException", (error) => {

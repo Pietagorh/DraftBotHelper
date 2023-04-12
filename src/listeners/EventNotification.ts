@@ -1,5 +1,5 @@
 import {Listener} from "../Listener.js";
-import {Message} from "discord.js";
+import {Events, Message} from "discord.js";
 import {embedDescriptionIncludes, embedHasAuthor, hasContent, isDraftBotId, isInteractionReply, not} from "../Checks.js";
 import {reminders} from "../index.js";
 import {ReminderTypes} from "../ReminderTypes.js";
@@ -12,6 +12,8 @@ export const listener: Listener = {
 		embedHasAuthor,
 		hasContent
 	],
+
+	listeningToEvents: [Events.MessageCreate],
 
 	execute(message: Message): void {
 		const user = message.author;
