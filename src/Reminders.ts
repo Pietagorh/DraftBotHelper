@@ -1,14 +1,15 @@
 import {User} from "discord.js";
 import {ReminderTypes} from "./ReminderTypes.js";
+import {reminders} from "./index.js";
 
 export class Reminders {
-	public reminders: {[userId: string]: {[reminder: string]: NodeJS.Timeout}}
+	public reminders: {[userId: string]: {[reminder: string]: NodeJS.Timeout}};
 
 	constructor() {
 		this.reminders = {};
 	}
 
-	setReminder(user: User, reminderType: ReminderTypes, delay: number) {
+	setReminder(user: User, reminderType: ReminderTypes, delay: number): void {
 		if (!this.reminders[user.id]) {
 			this.reminders[user.id] = {};
 		}
@@ -17,7 +18,7 @@ export class Reminders {
 
 		this.reminders[user.id][reminderType] = setTimeout(async () => {
 			await user.send(`Reminder ${reminderType}`);
-			this.removeUnused(user, reminderType);
+			reminders.removeUnused(user, reminderType);
 		}, delay);
 		console.log(`${user.username} set reminder ${reminderType} for ${delay / 60000} minutes`);
 	}

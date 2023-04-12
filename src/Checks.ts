@@ -16,7 +16,7 @@ export function contentStartsWith(text: string): Check {
 }
 
 export function isInteractionReply(message: Message): boolean {
-	return !!message.interaction
+	return !!message.interaction;
 }
 
 export function not(check: Check): Check {

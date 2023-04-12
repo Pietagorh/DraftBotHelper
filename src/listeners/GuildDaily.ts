@@ -11,8 +11,8 @@ export const listener: Listener = {
 		embedTitleIncludes("Récompense de la guilde ")
 	],
 
-	async execute(message: Message): Promise<void> {
+	execute(message: Message): void {
 		const user = message.interaction.user;
-		reminders.setReminder(user, ReminderTypes.GUILD_DAILY, 22 * 60 * 60 * 1000 /*22h*/);
+		reminders.setReminder(user, ReminderTypes.GUILD_DAILY, 22 * 60 * 60 * 1000 /* 22h */);
 	}
 };

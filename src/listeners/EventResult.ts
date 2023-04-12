@@ -20,7 +20,7 @@ export const listener: Listener = {
 			delay += millisecondsFromString(message.content.split("** | :clock10: Temps perdu : **")[1].split("** |")[0]);
 		}
 		if (message.content.endsWith(":")) {
-				delay += EffectsConstants.DURATION[`:${message.content.split(":").slice(-2, -1)[0]}:` as keyof typeof EffectsConstants.DURATION];
+			delay += EffectsConstants.DURATION[`:${message.content.split(":").slice(-2, -1)[0]}:` as keyof typeof EffectsConstants.DURATION];
 		}
 		reminders.setReminder(await client.users.fetch(userId), ReminderTypes.REPORT, delay);
 	}

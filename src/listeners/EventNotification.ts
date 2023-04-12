@@ -13,7 +13,7 @@ export const listener: Listener = {
 		hasContent
 	],
 
-	async execute(message: Message): Promise<void> {
+	execute(message: Message): void {
 		const user = message.author;
 		reminders.clearReminder(user, ReminderTypes.REPORT);
 	}

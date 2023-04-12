@@ -11,7 +11,7 @@ export const reminders = new Reminders();
 export const config = JSON.parse(readFileSync("./config.json", "utf-8")) as unknown as {token: string, draftbotId: string};
 
 client.once(Events.ClientReady, () => {
-    console.log("Started");
+	console.log("Started");
 });
 
 const listeners: Listener[] = [];
@@ -24,7 +24,7 @@ readdir("./dist/listeners", (err, files) => {
 			listeners.push(module.listener);
 		});
 	});
-})
+});
 
 client.on(Events.MessageCreate, (message: Message) => {
 	for (const listener of listeners) {
