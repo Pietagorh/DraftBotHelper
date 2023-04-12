@@ -39,6 +39,7 @@ client.on(Events.MessageCreate, async (message: Message) => {
 	await executeListeners(message, Events.MessageCreate);
 });
 client.on(Events.MessageUpdate, async (message: Message) => {
+	message = await message.fetch();
 	await executeListeners(message, Events.MessageUpdate);
 });
 
