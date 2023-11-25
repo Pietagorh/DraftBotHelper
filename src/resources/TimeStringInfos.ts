@@ -2,7 +2,7 @@ export abstract class TimeStringInfos {
 	static readonly SHORT_TIME_INFO = [
 		{
 			symbol: "H",
-			inMilliseconds: 360000
+			inMilliseconds: 3600000
 		},
 		{
 			symbol: "Min",

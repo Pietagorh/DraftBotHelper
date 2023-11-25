@@ -3,7 +3,7 @@ import {Reminders} from "./Reminders.js";
 import {readdir, readFileSync} from "fs";
 import {Events, GatewayIntentBits as Intents, Message} from "discord.js";
 import {Listener} from "./Listener.js";
-import {Check} from "./Checks.js";
+import {Check, isDraftBotId, commandNameIs, embedHasTitle} from "./Checks.js";
 
 export const client = new DBHelper({intents: [Intents.Guilds, Intents.GuildMessages, Intents.MessageContent]});
 export const reminders = new Reminders();
@@ -26,7 +26,8 @@ readdir("./dist/listeners", (err, files) => {
 	});
 });
 
-async function executeListeners(message: Message, fromEvent: Events): Promise<void> {
+client.on(Events.MessageCreate, (message: Message) => {
+	console.log(`${isDraftBotId(message)}, ${commandNameIs("guilddailybonus")(message)}, ${embedHasTitle(message)}, ${message.embeds[0]}`)
 	for (const listener of listeners) {
 		if (listener.listeningToEvents.includes(fromEvent) && listener.checks.every((check: Check) => check(message))) {
 			await listener.execute(message, fromEvent);

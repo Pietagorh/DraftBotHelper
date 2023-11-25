@@ -16,7 +16,7 @@ export abstract class EffectsConstants {
 		SCARED: ":scream:"
 	};
 
-	static readonly DURATION = {
+	static readonly DURATION /* in minutes */ = {
 		":baby:": 0,
 		":skull:": 16666667,
 		":smiley:": 0,
