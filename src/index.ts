@@ -26,22 +26,23 @@ readdir("./dist/listeners", (err, files) => {
 	});
 });
 
-client.on(Events.MessageCreate, (message: Message) => {
+function executeListeners(message: Message, fromEvent: Events) {
 	console.log(`${isDraftBotId(message)}, ${commandNameIs("guilddailybonus")(message)}, ${embedHasTitle(message)}, ${message.embeds[0]}`)
 	for (const listener of listeners) {
 		if (listener.listeningToEvents.includes(fromEvent) && listener.checks.every((check: Check) => check(message))) {
-			await listener.execute(message, fromEvent);
+			listener.execute(message, fromEvent);
 			return;
 		}
 	}
 }
 
 client.on(Events.MessageCreate, async (message: Message) => {
-	await executeListeners(message, Events.MessageCreate);
+	executeListeners(message, Events.MessageCreate);
 });
+
 client.on(Events.MessageUpdate, async (message: Message) => {
 	message = await message.fetch();
-	await executeListeners(message, Events.MessageUpdate);
+	executeListeners(message, Events.MessageUpdate);
 });
 
 process.on("uncaughtException", (error) => {
