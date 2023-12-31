@@ -54,3 +54,11 @@ export function embedHasDescription(message: Message): boolean {
 export function embedDescriptionIncludes(text: string): Check {
 	return (message: Message) => embedHasDescription(message) && message.embeds[0].description.includes(text);
 }
+
+export function embedDescriptionIncludesAny(texts: string[]): Check {
+	return (message: Message) => texts.some(text => embedDescriptionIncludes(text)(message));
+}
+
+export function or(check_a: Check, check_b: Check): Check {
+	return (message: Message) => check_a(message) || check_b(message);
+}

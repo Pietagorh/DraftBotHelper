@@ -3,6 +3,6 @@ import {Check} from "./Checks.js";
 
 export interface Listener {
 	readonly checks: Check[];
-	execute(message: Message, fromEvent: Events): void
 	listeningToEvents: Events[];
+	execute(message: Message, fromEvent: Events): void | Promise<void>
 }

@@ -1,4 +1,6 @@
 import {TimeStringInfos} from "./resources/TimeStringInfos.js";
+import {EmbedAuthorData, Message, User} from "discord.js";
+import {client} from "./index.js";
 
 export function millisecondsFromString(text: string): number {
 	let time = 0;
@@ -11,4 +13,12 @@ export function millisecondsFromString(text: string): number {
 	}
 
 	return time;
+}
+
+export async function userFromEmbedAuthor(author: EmbedAuthorData): Promise<User> {
+	return await client.users.fetch(author.iconURL.slice("https://cdn.discordapp.com/avatars/".length).split("/")[0]);
+}
+
+export async function messageRepliedTo(message: Message): Promise<Message> {
+	return await message.channel.messages.fetch(message.reference.messageId)
 }

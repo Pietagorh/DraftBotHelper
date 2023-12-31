@@ -14,7 +14,6 @@ export const listener: Listener = {
 	listeningToEvents: [Events.MessageCreate],
 
 	execute(message: Message): void {
-		const user = message.interaction.user;
-		reminders.setReminder(user, ReminderTypes.DAILY, 22 * 60 * 60 * 1000 /* 22h */);
+		reminders.setReminder(message.interaction.user, ReminderTypes.DAILY, 22 * 60 * 60 * 1000 /* 22h */);
 	}
 };
