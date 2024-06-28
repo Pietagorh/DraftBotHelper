@@ -17,6 +17,6 @@ export const listener: Listener = {
 	listeningToEvents: [Events.MessageCreate],
 
 	async execute(message: Message): Promise<void> {
-		reminders.clearReminder(await userFromEmbedAuthor(message.embeds[0].author), ReminderTypes.REPORT);
+		reminders.clearUniqueReminder(await userFromEmbedAuthor(message.embeds[0].author), ReminderTypes.REPORT);
 	}
 };
